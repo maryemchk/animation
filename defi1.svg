@@ -1,0 +1,144 @@
+<svg width="1350" height="600" xmlns="http://www.w3.org/2000/svg" style="background: black;">
+  <!-- Styles for the text animation -->
+  <style>
+    :root,:after,*:before {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -ms-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+    svg{
+      background: black;
+     
+      font-size: 10px;
+      margin: 0;
+      padding: 0%;
+    }
+    .an1,.an2{
+      stroke: #0ed1c1;
+       font-family: Arial;
+      font-size: 70px;
+      font-weight: 700;
+      stroke-width: 5;
+      animation: textAnimate 0s infinite alternate; 
+    }
+    g {
+      stroke: #0ed1c1;
+      font-size: 70px;
+      font-weight: 700;
+      stroke-width: 5;
+      animation: textAnimate 0s infinite alternate; 
+    }
+    @keyframes textAnimate {
+      0% {
+        stroke-dasharray: 0 50%;
+        stroke-dashoffset: 20%;
+      }
+      100% {
+        stroke-dasharray: 50% 0;
+        stroke-dashoffset: -20%;
+      }
+
+    }
+    .an3{
+    stroke: white;
+      font-size: 40px;
+      font-weight: 1;
+      font-family:system-ui;
+    }
+
+  </style>
+
+  <!-- Text "Nuit D'info" -->
+  <text  class="an1" x="55%" y="30%" fill="none" text-anchor="middle">
+   Nuit D'info
+  
+  </text >
+  <text class="an2"  x="55%" y="50%" fill="none" text-anchor="middle">
+Rate the experience !
+  
+  </text>
+
+   <!-- Stars positioned under the text -->
+  <g transform="translate(500, 400)">
+    <polygon id="star1" points="30,0 40,20 60,20 44,30 50,50 30,40 10,50 16,30 0,20 20,20"
+             fill="black" stroke=" #0ed1c1" stroke-width="1" onclick="changeColor(event)" />
+    <polygon id="star2" points="30,0 40,20 60,20 44,30 50,50 30,40 10,50 16,30 0,20 20,20"
+             fill="black" stroke=" #0ed1c1" stroke-width="1" onclick="changeColor(event)" transform="translate(100, 0)" />
+    <polygon id="star3" points="30,0 40,20 60,20 44,30 50,50 30,40 10,50 16,30 0,20 20,20"
+             fill="black" stroke=" #0ed1c1" stroke-width="1" onclick="changeColor(event)" transform="translate(200, 0)" />
+    <polygon id="star4" points="30,0 40,20 60,20 44,30 50,50 30,40 10,50 16,30 0,20 20,20"
+             fill="black" stroke=" #0ed1c1" stroke-width="1" onclick="changeColor(event)" transform="translate(300, 0)" />
+    <polygon id="star5" points="30,0 40,20 60,20 44,30 50,50 30,40 10,50 16,30 0,20 20,20"
+             fill="black" stroke=" #0ed1c1" stroke-width="1" onclick="changeColor(event)" transform="translate(400, 0)" />
+  </g>
+ <text class="an3"  x="55%" y="90%" fill="none" text-anchor="middle">
+
+  
+  </text>
+
+   <!-- JavaScript to handle color change -->
+  <script type="text/ecmascript">
+    <![CDATA[
+      function changeColor(event) {
+        const star = event.target;
+
+const ratings=['','I Hate It😡','Bad😢','Not Bad😒','GOOD! 😊','I Love It!!!😘 ']
+               const starId = parseInt(star.getAttribute('id').replace('star', ''));
+               const rt1 = document.querySelectorAll('.an1');
+                 const rt2 = document.querySelectorAll('.an2');
+                  const rt3 = document.querySelectorAll('.an3')[0];
+ 
+      
+
+
+        if (star.getAttribute('fill') == 'black') {
+       
+        rt1.forEach((text, index) => {
+          const animationDuration = (6-starId) * 0.6; // Adjust the duration as needed
+          text.style.animation = `textAnimate ${animationDuration}s infinite alternate`;
+         
+        });
+        rt2.forEach((text, index) => {
+          const animationDuration = (6 - starId) * 0.6; // Adjust the duration as needed
+          text.style.animation = `textAnimate ${animationDuration}s infinite alternate`;
+        });
+          for (let i = 1; i <= starId; i++) {
+            const currentStar = document.getElementById('star' + i);
+            currentStar.setAttribute('fill', '#0ed1c1');
+           currentStar.setAttribute('stroke', 'black');
+           currentStar.style.animation=`textAnimate ${0.3}s infinite alternate`;
+           rt3.textContent = ratings[i ];
+           
+          }
+           
+          }
+
+          
+        
+        else{
+       
+             rt3.textContent=ratings[starId-1];
+            rt1.forEach((text, index) => {
+              
+          const animationDuration = (starId-1) * 0.9; // Adjust the duration as needed
+          text.style.animation = `textAnimate ${animationDuration}s infinite alternate`;
+        });
+         rt2.forEach((text, index) => {
+          const animationDuration = (starId-1) * 0.9; // Adjust the duration as needed
+          text.style.animation = `textAnimate ${animationDuration}s infinite alternate`;
+        });
+          for (let i =5; i >= starId; i--) {
+            const currentStar = document.getElementById('star' + i);
+            currentStar.setAttribute('fill', 'black');
+            currentStar.setAttribute('stroke', '#0ed1c1');
+            currentStar.style.animation=`textAnimate ${starId*0.3}s infinite alternate`;
+             rt3.textContent=ratings[i-1];
+          }
+        }
+      }
+    ]]>
+        
+  </script>
+
+</svg>
